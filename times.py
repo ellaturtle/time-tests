@@ -1,6 +1,6 @@
 import datetime
-
-
+    
+# Firts, def time_range generates a list of time intervals between a start and end time, divided into a specified number of intervals with optional gaps.
 def time_range(start_time, end_time, number_of_intervals=1, gap_between_intervals_s=0):
     start_time_s = datetime.datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
     end_time_s = datetime.datetime.strptime(end_time, "%Y-%m-%d %H:%M:%S")
@@ -10,7 +10,7 @@ def time_range(start_time, end_time, number_of_intervals=1, gap_between_interval
                  for i in range(number_of_intervals)]
     return [(ta.strftime("%Y-%m-%d %H:%M:%S"), tb.strftime("%Y-%m-%d %H:%M:%S")) for ta, tb in sec_range]
 
-
+# Then, def compute_overlap_time calculates the overlapping time intervals between two sets of time ranges.
 def compute_overlap_time(range1, range2):
     overlap_time = []
     for start1, end1 in range1:
@@ -20,6 +20,7 @@ def compute_overlap_time(range1, range2):
             overlap_time.append((low, high))
     return overlap_time
 
+# Finally, an example usage of the above functions is provided in the main block.
 if __name__ == "__main__":
     large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00")
     short = time_range("2010-01-12 10:30:00", "2010-01-12 10:45:00", 2, 60)
