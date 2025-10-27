@@ -37,3 +37,9 @@ def test_times_touching():
     result = compute_overlap_time(large, short)
     expected = []
     assert result == expected   
+
+def test_backwards_time_range():
+    try:
+        result = time_range("2010-01-12 10:30:00", "2010-01-12 10:00:00")
+    except ValueError as e:
+        result = e
