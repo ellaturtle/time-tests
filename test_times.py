@@ -30,3 +30,10 @@ def test_several_intervals():
     expected = [("2010-01-12 10:20:00", "2010-01-12 10:30:00"),
                 ("2010-01-12 10:30:00", "2010-01-12 10:40:00")]
     assert result == expected
+
+def test_times_touching():
+    large = time_range("2010-01-12 10:00:00", "2010-01-12 10:30:00")
+    short = time_range("2010-01-12 10:30:00", "2010-01-12 10:45:00")
+    result = compute_overlap_time(large, short)
+    expected = []
+    assert result == expected   
