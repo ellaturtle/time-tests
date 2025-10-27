@@ -44,3 +44,25 @@ def test_backwards_time_range():
 
     with pytest.raises(ValueError, match="end_time must be after start_time"):
         time_range(start_time, end_time)        
+
+@pytest.mark.parametrize(
+    ["time_range1, time_range2, expected"],
+    [
+        pytest.param(time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00"),
+                     time_range("2010-01-12 10:30:00", "2010-01-12 10:45:00"),
+                     [
+                         ("2010-01-12 10:30:00", "2010-01-12 10:45:00")
+                         ],
+                         id="simple overlap"
+                         ),
+        pytest.param(time_range("2010-01-12 10:00:00", "2010-01-12 10:30:00"),
+                     time_range("2010-01-12 10:40:00", "2010-01-12 10:50:00"),
+                     [],
+                     id="no overlap"
+                     ),
+    ]
+)
+def test_compute_overlap_time(time_range1, time_range2, expected):
+    computed_overlap = compute_overlap_time(time_range1, time_range2)
+
+    assert computed_overlap == expected
