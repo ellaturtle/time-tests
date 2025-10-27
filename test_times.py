@@ -1,3 +1,4 @@
+import pytest
 # Import the times.py file to test its functions.
 from times import time_range, compute_overlap_time
 
@@ -43,4 +44,10 @@ def test_backwards_time_range():
         result = time_range("2010-01-12 10:30:00", "2010-01-12 10:00:00")
     except ValueError as e:
         result = e
-        
+
+def test_backwards_time_range():
+    start_time = "2010-01-12 10:30:00"
+    end_time = "2010-01-12 10:00:00"
+
+    with pytest.raises(ValueError, match="end_time must be after start_time"):
+        time_range(start_time, end_time)        
